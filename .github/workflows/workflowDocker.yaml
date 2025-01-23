@@ -1,0 +1,19 @@
+name: testDockerImage
+
+on:
+  pull_request:
+  push: { branches: master }
+
+jobs:
+  test:
+    name: Run test docker
+    runs-on: ubuntu-latest
+    env:
+      COMPOSE_FILE: ././docker-compose.yaml
+
+    steps:
+    - name: Build docker images
+      run: docker-compose build
+
+    - name: Run tests
+      run: docker-compose run test
